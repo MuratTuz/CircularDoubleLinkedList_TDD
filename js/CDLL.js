@@ -149,21 +149,17 @@ class CDLL{
      * Gets the Node object at the index of the CDL List
      */
     get(index) {
-        let currentNode = this.head;
-        if (-1 < index && index <= this.count) {
-            while (0 <= index--) {
-                currentNode = currentNode.getNext();
-            }
-            return currentNode;
-        }         
-        return null; // index is out of CDL List
+        let currentNode = this.head.getNext();
+        if (index > this.count) return this.last();        
+        while (0 < index--) {
+            currentNode = currentNode.getNext();
+        }
+        return currentNode;
     }
 
     /**
-     * 
-     * @param {*} value 
-     * 
-     * Gets the Node object regarding its value
+     * @param {number} value 
+     * Gets the Node object regarding its value. While the List is circular, the count must be consider
      */
     find(value) {
         let currentNode = this.head;
@@ -196,15 +192,14 @@ class CDLL{
     }
 
     /**
-     * 
-     * @param {*} value
-     * 
+     * @param {number} value
      * It calls:
      *  with a parameter then sets the capacity of the list,
      *  without a parameter then gets the capacity of the list. 
+     * In oreder to prevent data loss, it checks whether new capacity is greater than current size
      */
     ofCapacity(value) {
-        if (value) {
+        if (value > this.count) {
             this.capacity = value;
         } else {
             this.capacity = 12; // default

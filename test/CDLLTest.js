@@ -63,7 +63,7 @@ describe('Circular Double Linked List - Test Section', function() {
             }
             let extraNode = new Node('sample');
             anotherCDLL.addAt(extraNode, 8).should.be.an.instanceOf(Node); // Adds at the end of the List which is index of 5
-            (anotherCDLL.get(8) === null).should.be.true(); 
+            anotherCDLL.get(8).getElement().should.equal('sample'); 
             anotherCDLL.find('sample').should.be.an.instanceOf(Node);
             anotherCDLL.size().should.equal(6);
             anotherCDLL.get(5).getElement().should.equal('sample');
