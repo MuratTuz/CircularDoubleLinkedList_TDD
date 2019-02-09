@@ -48,11 +48,35 @@ describe('Circular Double Linked List - Test Section', function() {
         });
 
         it('An object can be added at the head of CDL List', function() {
-            newCDLL.addFirst(node).should.equal(node);
+            let anotherCDLL = new CDLL();
+            for (let index = 0; index < 12; index++) { // Adds elements to [0,...,11] indexes, 12 items
+                const element = new Node(index);
+                anotherCDLL.addAt(element, index);           
+            }
+            anotherCDLL.get(0).getElement().should.equal(0);
+            anotherCDLL.size().should.equal(12);
+            anotherCDLL.ofCapacity().should.equal(12);
+            // after adding new Node('sample')
+            anotherCDLL.addFirst(node);
+            anotherCDLL.size().should.equal(12);
+            anotherCDLL.ofCapacity().should.equal(12);
+            anotherCDLL.first().getElement().should.equal('sample');
         });
 
         it('An object can be added at the tail of CDL List', function() {
-            newCDLL.addLast(node).should.equal(node);
+            let anotherCDLL = new CDLL();
+            for (let index = 0; index < 12; index++) { // Adds elements to [0,...,11] indexes, 12 items
+                const element = new Node(index);
+                anotherCDLL.addAt(element, index);           
+            }
+            anotherCDLL.get(11).getElement().should.equal(11);
+            anotherCDLL.size().should.equal(12);
+            anotherCDLL.ofCapacity().should.equal(12);
+            // after adding new Node('sample')
+            anotherCDLL.addLast(node);
+            anotherCDLL.size().should.equal(12);
+            anotherCDLL.ofCapacity().should.equal(12);
+            anotherCDLL.last().getElement().should.equal('sample');
         });
 
         it("An object can be added at any index less then the number of CDLL's elements otherwise it is added at the end", function() {
@@ -70,6 +94,7 @@ describe('Circular Double Linked List - Test Section', function() {
         })
 
         it('An object in the CDL List must be find regarding its value', function() {
+            newCDLL.addFirst(node);
             newCDLL.find('sample').should.be.an.instanceOf(Node); 
             (newCDLL.find('sample') !== null).should.be.true();
             (newCDLL.find('not_in_the_List') === null).should.eql(true);

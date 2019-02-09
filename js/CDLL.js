@@ -1,12 +1,12 @@
 
-/* CircularDoublyLinkedList bekledigimiz davranislar/metodlar:
-- addFirst(value), //eklenen node geri döndürülsün
-- addLast(value), //eklenen node geri döndürülsün
-- addAt(index, value), //eklenen node geri döndürülsün
-- remove(value), // silinen node geri döndürülsün
-- removeLast(), // silinen node geri döndürülsün
-- removeFirst(),// silinen node geri döndürülsün
-- removeAt(index), // silinen node geri döndürülsün
+/* CircularDoublyLinkedList - expected beheviors/methods:
+- addFirst(value), // returns added Node
+- addLast(value), // returns added Node
+- addAt(index, value), // returns added Node
+- remove(value), // returns removed Node
+- removeLast(), // returns removed Node
+- removeFirst(),// returns removed Node
+- removeAt(index), // returns removed Node
 - first(),
 - last(),
 - find(value),
@@ -16,7 +16,7 @@
 - size(), 
 - capacity(value),
 - capacity,
-- iterator implementasyonu
+- iterator implementation
 */
 
 
@@ -28,34 +28,27 @@ class CDLL{
     }
 
     addFirst(node) {
-        let result = this.addAt(node, 0);
-        return result;
+        this.addAt(node, 0);
+        let headNode = this.head.getNext();
+        this.head.setNext(headNode.getPrevious());
     }
 
     addLast(node) {
-        let result = this.addAt(node, this.count); // Adds item at the next of the last-item whose index (this.count-1)
-        return result;
+        return this.addAt(node, this.count); // Adds item at the next of the last-item whose index (this.count-1)
     }
 
     addAt(newNode, index) { 
         if (newNode instanceof Node) {
-            let currentNode;
-            if (index < this.size()) {
-                currentNode = this.get(index);
-            } else {
-                currentNode = this.last();
-            }
+            let currentNode = this.get(index);
             this.addToList(currentNode, newNode);
             return newNode;
-        } else {
-          return null;
-        }
+        } 
+        return null;
     }
 
     /**
-     * 
-     * @param {*} currentNode 
-     * @param {*} newNode 
+     * @param {Node} currentNode 
+     * @param {Node} newNode 
      * If List is empty, currentNode points also the HEAD
      * Adds newNode in front of currentNode
      */
@@ -83,8 +76,7 @@ class CDLL{
     }
 
     /**
-     * 
-     * @param {*} removingNode 
+     * @param {Node} removingNode 
      * It must care of HEAD while removing an item
      */
     removeFromList(removingNode) {
@@ -143,14 +135,12 @@ class CDLL{
     }
 
     /**
-     * 
-     * @param {*} index 
-     * 
+     * @param {number} index 
      * Gets the Node object at the index of the CDL List
      */
     get(index) {
         let currentNode = this.head.getNext();
-        if (index > this.count) return this.last();        
+        if (index >= this.count) return this.last();        
         while (0 < index--) {
             currentNode = currentNode.getNext();
         }
