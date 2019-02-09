@@ -4,9 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Circular Double Linked List - Test Page</title>
+
+    <link rel="stylesheet" href="css/mocha.css">
+
+    <script src="js/Node.js"></script>
+    <script src="js/CDLL.js"></script>
+
+    <script src="lib/chai.js"></script>
+    <script src="lib/should.min.js"></script>
+    <script src="lib/mocha.min.js"></script>
+
 </head>
 <body>
+    <div id="mocha"></div>
     
+    <script>
+        mocha.setup('bdd')
+    </script>
+    <script src="test/NodeTest.js"></script>
+    <script src="test/CDLLTest.js"></script>
+    <script>
+        mocha.checkLeaks();
+        mocha.run()
+    </script>
 </body>
 </html>
