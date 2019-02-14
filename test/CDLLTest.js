@@ -63,6 +63,53 @@ describe('Circular Double Linked List - Test Section', function() {
             anotherCDLL.first().getElement().should.equal('sample');
         });
 
+        it('First extra test for adding at the head of CDL List', function() {
+            let anotherCDLL = new CDLL();
+            for (let index = 0; index < 12; index++) { // Adds elements to [0,...,11] indexes, 12 items
+                const element = new Node(index);
+                anotherCDLL.addAt(element, index);           
+            }
+            anotherCDLL.get(0).getElement().should.equal(0);
+            anotherCDLL.size().should.equal(12);
+            anotherCDLL.ofCapacity().should.equal(12);
+            // after adding new Node('sample')
+            anotherCDLL.addFirst(node);
+            anotherCDLL.size().should.equal(12);
+            anotherCDLL.ofCapacity().should.equal(12);
+            anotherCDLL.first().getElement().should.equal('sample');
+            anotherCDLL.get(0).getElement().should.equal('sample');
+            anotherCDLL.addFirst(new Node('murat'));
+            anotherCDLL.get(0).getElement().should.equal('murat');
+            anotherCDLL.removeFirst().getElement().should.equal('murat');
+            anotherCDLL.size().should.equal(11);
+            anotherCDLL.first().getElement().should.equal(1);
+        });
+
+        it('Second extra test for adding at the head of CDL List', function() {
+            let cdll = new CDLL();            
+            for (let index = 0; index < 9; index++) { 
+                const element = new Node(index);
+                cdll.addAt(element, index);           
+            }
+            cdll.addFirst(new Node('Jonas'));
+            cdll.first().getElement().should.equal('Jonas');
+            cdll.get(0).getElement().should.equal('Jonas');
+            cdll.size().should.equal(10);
+
+            cdll.addFirst(new Node('Christian'));
+            cdll.first().getElement().should.equal('Christian');
+            cdll.get(0).getElement().should.equal('Christian');
+            cdll.get(1).getElement().should.equal('Jonas');
+            cdll.size().should.equal(11);
+
+            cdll.addFirst(new Node('Cedric'));            
+             cdll.first().getElement().should.equal('Cedric');
+            cdll.get(0).getElement().should.equal('Cedric');
+            cdll.get(1).getElement().should.equal('Christian');
+            cdll.get(2).getElement().should.equal('Jonas');
+            cdll.size().should.equal(12);
+        });
+
         it('An object can be added at the tail of CDL List', function() {
             let anotherCDLL = new CDLL();
             for (let index = 0; index < 12; index++) { // Adds elements to [0,...,11] indexes, 12 items
@@ -77,6 +124,31 @@ describe('Circular Double Linked List - Test Section', function() {
             anotherCDLL.size().should.equal(12);
             anotherCDLL.ofCapacity().should.equal(12);
             anotherCDLL.last().getElement().should.equal('sample');
+        });
+
+        it('Additional test for adding tail of CDL List', function() {
+            let cdll = new CDLL();            
+            for (let index = 0; index < 9; index++) { 
+                const element = new Node(index);
+                cdll.addAt(element, index);           
+            }
+            cdll.addLast(new Node('Jonas'));
+            cdll.last().getElement().should.equal('Jonas');
+            cdll.get(cdll.size() - 1).getElement().should.equal('Jonas');
+            cdll.size().should.equal(10);
+
+            cdll.addLast(new Node('Christian'));
+            cdll.last().getElement().should.equal('Christian');
+            cdll.get(cdll.size() - 1).getElement().should.equal('Christian');
+            cdll.get(cdll.size() - 2).getElement().should.equal('Jonas');
+            cdll.size().should.equal(11);
+
+            cdll.addLast(new Node('Cedric'));            
+            cdll.last().getElement().should.equal('Cedric');
+            cdll.get(cdll.size() - 1).getElement().should.equal('Cedric');
+            cdll.get(cdll.size() - 2).getElement().should.equal('Christian');
+            cdll.get(cdll.size() - 3).getElement().should.equal('Jonas');
+            cdll.size().should.equal(12);
         });
 
         it("An object can be added at any index less then the number of CDLL's elements otherwise it is added at the end", function() {
@@ -213,9 +285,82 @@ describe('Circular Double Linked List - Test Section', function() {
             anotherCDLL.ofCapacity().should.equal(12); // default capacity is 12
         })
 
-        it('Sets the capacity of the List bby dynamically', function() {
-            let anotherCDLL = new CDLL();
-            anotherCDLL.ofCapacity(15).should.equal(15); 
+        it('Sets the capacity of the List by dynamically', function() {
+            let cdll = new CDLL();            
+            for (let index = 0; index < 9; index++) { 
+                const element = new Node(index);
+                cdll.addAt(element, index);           
+            }
+            cdll.size().should.equal(9);
+            cdll.ofCapacity().should.equal(12);
+
+            cdll.addFirst(new Node('Hans'));
+            cdll.addFirst(new Node('Alice'));
+            cdll.addFirst(new Node('Jacops'));
+            cdll.size().should.equal(12);
+            cdll.ofCapacity().should.equal(12);
+
+            cdll.ofCapacity(15).should.equal(15); 
+
+            cdll.addFirst(new Node('Jonas'));
+            cdll.first().getElement().should.equal('Jonas');
+            cdll.get(0).getElement().should.equal('Jonas');
+            cdll.size().should.equal(13);
+            cdll.ofCapacity().should.equal(15); 
+
+            cdll.addFirst(new Node('Christian'));
+            cdll.first().getElement().should.equal('Christian');
+            cdll.get(0).getElement().should.equal('Christian');
+            cdll.get(1).getElement().should.equal('Jonas');
+            cdll.size().should.equal(14);
+            cdll.ofCapacity().should.equal(15); 
+
+            cdll.addFirst(new Node('Cedric'));            
+            cdll.first().getElement().should.equal('Cedric');
+            cdll.get(0).getElement().should.equal('Cedric');
+            cdll.get(1).getElement().should.equal('Christian');
+            cdll.get(2).getElement().should.equal('Jonas');
+            cdll.size().should.equal(15);
+            cdll.ofCapacity().should.equal(15); 
+        })
+
+        it('Additional test for seting the capacity of the List by dynamically', function() {
+            let cdll = new CDLL();            
+            for (let index = 0; index < 9; index++) { 
+                const element = new Node(index);
+                cdll.addAt(element, index);           
+            }
+            cdll.size().should.equal(9);
+            cdll.ofCapacity().should.equal(12);
+
+            cdll.addLast(new Node('Hans'));
+            cdll.addLast(new Node('Alice'));
+            cdll.addLast(new Node('Jacops'));
+            cdll.size().should.equal(12);
+            cdll.ofCapacity().should.equal(12);
+
+            cdll.ofCapacity(15).should.equal(15); 
+
+            cdll.addLast(new Node('Jonas'));
+            cdll.last().getElement().should.equal('Jonas');
+            cdll.get(cdll.size() - 1).getElement().should.equal('Jonas');
+            cdll.size().should.equal(13);
+            cdll.ofCapacity().should.equal(15); 
+
+            cdll.addLast(new Node('Christian'));
+            cdll.last().getElement().should.equal('Christian');
+            cdll.get(cdll.size() - 1).getElement().should.equal('Christian');
+            cdll.get(cdll.size() - 2).getElement().should.equal('Jonas');
+            cdll.size().should.equal(14);
+            cdll.ofCapacity().should.equal(15); 
+
+            cdll.addLast(new Node('Cedric'));            
+            cdll.last().getElement().should.equal('Cedric');
+            cdll.get(cdll.size() - 1).getElement().should.equal('Cedric');
+            cdll.get(cdll.size() - 2).getElement().should.equal('Christian');
+            cdll.get(cdll.size() - 3).getElement().should.equal('Jonas');
+            cdll.size().should.equal(15);
+            cdll.ofCapacity().should.equal(15); 
         })
 
         it('Apply iterator loop over the List', function() {

@@ -28,9 +28,9 @@ class CDLL{
     }
 
     addFirst(node) {
-        this.addAt(node, 0);
-        let headNode = this.head.getNext();
-        this.head.setNext(headNode.getPrevious());
+        let result = this.addLast(node);
+        this.head.setNext(node);
+        return result;
     }
 
     addLast(node) {
@@ -50,7 +50,7 @@ class CDLL{
      * @param {Node} currentNode 
      * @param {Node} newNode 
      * If List is empty, currentNode points also the HEAD
-     * Adds newNode in front of currentNode
+     * Adds newNode next to currentNode
      */
     addToList(currentNode, newNode) {
         if (!this.isEmpty()) { // List is not empty
@@ -117,12 +117,12 @@ class CDLL{
     }
 
     removeLast() {
-        let result = this.removeAt(this.count - 1) // Removes an existed indexed item
-        return result;
+        return this.removeAt(this.count - 1) // Removes an existed indexed item
     }
 
     removeFirst() {
         let result = this.removeAt(0) // Removes first item in the List
+        this.head.setNext(result.getNext());
         return result;
     }
 
@@ -191,7 +191,7 @@ class CDLL{
     ofCapacity(value) {
         if (value > this.count) {
             this.capacity = value;
-        } else {
+        } else if (value) { // if not an empty parameter
             this.capacity = 12; // default
         }
         return this.capacity;

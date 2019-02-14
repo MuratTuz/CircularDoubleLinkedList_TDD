@@ -54,6 +54,7 @@ describe('Node - Test Section', function() {
         });
 
         it("A Node object can reach next Node", function() {
+            should(currentNode.getNext()).eql(null);
             (currentNode.getNext() === null).should.be.true();
             currentNode.setNext(nextNode);
             (currentNode.getNext() === null).should.not.be.true();
